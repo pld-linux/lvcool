@@ -1,0 +1,62 @@
+diff -ur LVCool/LVCool.cpp LVCool-/LVCool.cpp
+--- LVCool/LVCool.cpp	Mon Feb  3 10:55:54 2003
++++ LVCool-/LVCool.cpp	Mon Feb  3 10:57:58 2003
+@@ -28,6 +28,8 @@
+ 
+ #include <stdlib.h>
+ #include <sys/io.h>
++#include <sched.h>
++#include <string.h>
+ 
+ #include <unistd.h>
+ #include <stdio.h>
+@@ -161,14 +163,30 @@
+ 
+ }
+ 
++int do_yield = 0;
++int nice_value = 20;
++
+ void Idleloop()
+ {
+-	if(nice(20) == -1)
++	if(nice(nice_value) == -1)
+ 	{
+ 	perror("nice");
++	exit(1);
++	}
++
++	if (do_yield) {
++		/* Without sched_yield() when there is single other process 
++		 * using all the CPU power lvcool will use 15%, and the process
++		 * 85%. With 95%/5%. 
++		 */
++		while(1) {
++			inb(Reg_PL2);
++			sched_yield();
++		}
++	} else {
++		while(1)
++			inb(Reg_PL2);
+ 	}
+-	while(1)
+-		inb(Reg_PL2);
+ }
+ 
+ 
+@@ -178,9 +196,14 @@
+ int main(int argc, char *argv[])
+ {
+ 	int i;
++
++	if (argv[1] && strcmp(argv[1], "-y") == 1)
++		do_yield = 1;
+ 	
+- 	if (iopl(3)<0)
++ 	if (iopl(3)<0) {
+ 		perror("must run as root");
++		exit(1);
++	}
+ 	if (fork()) exit(1);
+ 	for(i=0;i<255;i++)
+ 		close(i);
