@@ -10,6 +10,7 @@ Source1:	%{name}.init
 Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-fork.patch
 URL:		http://vcool.occludo.net/VC_Linux.html
+ExclusiveArch:	%{ix86}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -28,7 +29,7 @@ VT8371/VT82C686x) podczas stanu ja³owego.
 %patch1 -p1
 
 %build
-%{__make} CC="%{__cxx}"
+%{__make} CC="%{__cc}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
