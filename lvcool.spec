@@ -29,7 +29,7 @@ VT8371/VT82C686x) podczas stanu ja³owego.
 %patch1 -p1
 
 %build
-%{__make} CC="%{__cc}"
+%{__make} CC="%{__cxx}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
