@@ -1,0 +1,48 @@
+#!/bin/sh
+#
+# lvcool	This shell script takes care of starting and stopping lvcool
+#
+# chkconfig:    2345 40 60
+# description:	Little utility will cool your processor
+# processname:	lvcool
+#
+# pidfile:	/var/run/lvcool.pid
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+# See how we were called.
+case "$1" in
+  start)
+        # Start daemons.
+	if [ ! -f /var/lock/subsys/lvcool ]; then
+		msg_starting lvcool
+		daemon lvcool &
+		RETVAL=$?
+		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/lvcool
+	else
+		msg_already_running lvcool
+	fi
+	;;
+  stop)
+	# Stop daemons.
+	if [ -f /var/lock/subsys/lvcool ]; then
+		msg_stopping lvcool
+		killproc lvcool
+		rm -f /var/lock/subsys/lvcool >/dev/null 2>&1
+	else
+		msg_not_running lvcool
+		exit 1
+	fi
+	;;
+  restart)
+	$0 stop
+	$0 start
+	;;
+  status)
+	status lvcool
+	;;
+  *)
+	msg_usage "$0 {start|stop|restart|status}"
+	exit 1
+esac
