@@ -6,6 +6,7 @@ Release:	2
 License:	GPL v2
 Group:		Daemons
 Source0:	http://vcool.occludo.net/VCool-%{version}-Linux.tar.gz
+# Source0-md5:	b07bd25ccc292235783d4890b6be3906
 Source1:	%{name}.init
 Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-fork.patch
