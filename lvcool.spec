@@ -2,7 +2,7 @@ Summary:	Little utility will cool your processor
 Summary(pl):	Ma³e narzêdzie, które bêdzie ch³odzi³o twój procesor
 Name:		lvcool
 Version:	1.7
-Release:	2
+Release:	3
 License:	GPL v2
 Group:		Daemons
 Source0:	http://vcool.occludo.net/VCool-%{version}-Linux.tar.gz
