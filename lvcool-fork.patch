@@ -8,7 +8,7 @@
 +	
   	if (iopl(3)<0)
  		perror("must run as root");
-+	if (fork()) exit(1);
++	if (fork()) exit(0);
 +	for(i=0;i<255;i++)
 +		close(i);
 +	setsid();
