@@ -2,13 +2,14 @@ Summary:	Little utility will cool your processor
 Summary(pl):	Ma³e narzêdzie, które bêdzie ch³odzi³o twój procesor
 Name:		lvcool
 Version:	1.7
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		Daemons
 Source0:	http://vcool.occludo.net/VCool-%{version}-Linux.tar.gz
 Source1:	%{name}.init
 Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-fork.patch
+Patch2:		%{name}-sched_yield.patch
 URL:		http://vcool.occludo.net/VC_Linux.html
 ExclusiveArch:	%{ix86}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -27,6 +28,7 @@ VT8371/VT82C686x) podczas stanu ja³owego.
 %setup  -q -n LVCool
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 %{__make} CC="%{__cxx}"
