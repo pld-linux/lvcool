@@ -2,7 +2,7 @@
 #
 # lvcool	This shell script takes care of starting and stopping lvcool
 #
-# chkconfig:    2345 40 60
+# chkconfig:	2345 40 60
 # description:	Little utility will cool your processor
 # processname:	lvcool
 #
@@ -14,7 +14,7 @@
 # See how we were called.
 case "$1" in
   start)
-        # Start daemons.
+	# Start daemons.
 	if [ ! -f /var/lock/subsys/lvcool ]; then
 		msg_starting lvcool
 		daemon lvcool -y
@@ -22,6 +22,7 @@ case "$1" in
 		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/lvcool
 	else
 		msg_already_running lvcool
+		exit 1
 	fi
 	;;
   stop)
@@ -35,7 +36,7 @@ case "$1" in
 		exit 1
 	fi
 	;;
-  restart)
+  restart|reload)
 	$0 stop
 	$0 start
 	;;
@@ -43,6 +44,8 @@ case "$1" in
 	status lvcool
 	;;
   *)
-	msg_usage "$0 {start|stop|restart|status}"
+	msg_usage "$0 {start|stop|restart|reload|status}"
 	exit 1
 esac
+
+exit $RETVAL
