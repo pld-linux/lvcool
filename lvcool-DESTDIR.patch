@@ -1,0 +1,40 @@
+--- ./Makefile.org	Wed Jul 11 11:33:40 2001
++++ ./Makefile	Sun Jul 21 16:48:46 2002
+@@ -7,6 +7,7 @@
+ #
+ 
+ CC		= gcc
++SBINDIR		= /usr/sbin
+ 
+ # the object files for LVCool
+ OBJ		= LVCool.o \
+@@ -16,11 +17,11 @@
+ 
+ # Linking Object Files
+ $(PRG): $(OBJ)
+-	$(CC) -o $(PRG) $(OBJ)
++	$(CC) $(LDFLAGS) -o $(PRG) $(OBJ)
+  
+ # Compile Source Files 
+ %.o: %.cpp
+-	$(CC) -c $< 
++	$(CC) $(CFLAGS) -c $< 
+ 
+ clean:
+ 	@echo "LVCool Clean Process"
+@@ -35,12 +36,13 @@
+ 	@echo "LVCool Install Process"
+ 	@echo "======================"
+ 	@echo
+-	@cp lvcool /sbin/lvcool
++	install -d $(DESTDIR)$(SBINDIR)
++	@cp lvcool $(DESTDIR)$(SBINDIR)/lvcool
+ 	@echo "Installation Complete !!!"
+ 
+ uninstall:
+ 	@echo "Uninstall LVCool... "
+-	@rm -f /sbin/lvcool
++	@rm -f $(DESTDIR)$(SBINDIR)/lvcool
+ 	@echo "Ready"
+ 
+ buildpkg:
