@@ -12,6 +12,8 @@ Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-fork.patch
 Patch2:		%{name}-sched_yield.patch
 URL:		http://vcool.occludo.net/VC_Linux.html
+PreReq:		rc-scripts
+Requires(post,preun):	/sbin/chkconfig
 ExclusiveArch:	%{ix86}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -21,8 +23,8 @@ low-power mode on Via KT133 or KX133 (VT8363 or VT8371/VT82C686x)
 chipsets during idle.
 
 %description -l pl
-LVCool och這dzi tw鎩 procesor poprzez prze陰czenie go do trybu o
-niskim poborze mocy na chipsetach KT133 lub KX133 (VT8363 lub
+LVCool ch這dzi procesor poprzez prze陰czenie go w tryb o niskim
+poborze mocy na chipsetach KT133 lub KX133 (VT8363 lub
 VT8371/VT82C686x) podczas stanu ja這wego.
 
 %prep
@@ -32,13 +34,15 @@ VT8371/VT82C686x) podczas stanu ja這wego.
 %patch2 -p1
 
 %build
-%{__make} CC="%{__cxx}"
+%{__make} \
+	CC="%{__cxx}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/{usr/sbin,etc/rc.d/init.d}
+install -d $RPM_BUILD_ROOT{%{_sbindir},/etc/rc.d/init.d}
 
-%{__make} install DESTDIR=$RPM_BUILD_ROOT
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/lvcool
 
