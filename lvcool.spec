@@ -12,6 +12,7 @@ Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-fork.patch
 Patch2:		%{name}-sched_yield.patch
 URL:		http://vcool.occludo.net/VC_Linux.html
+BuildRequires:	libstdc++-devel
 PreReq:		rc-scripts
 Requires(post,preun):	/sbin/chkconfig
 ExclusiveArch:	%{ix86}
