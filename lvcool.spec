@@ -13,8 +13,9 @@ Patch1:		%{name}-fork.patch
 Patch2:		%{name}-sched_yield.patch
 URL:		http://vcool.occludo.net/VC_Linux.html
 BuildRequires:	libstdc++-devel
-PreReq:		rc-scripts
+BuildRequires:	rpmbuild(macros) >= 1.268
 Requires(post,preun):	/sbin/chkconfig
+Requires:	rc-scripts
 ExclusiveArch:	%{ix86}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -52,17 +53,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 /sbin/chkconfig --add lvcool
-if [ -f /var/lock/subsys/lvcool ]; then
-	/etc/rc.d/init.d/lvcool restart 1>&2
-else
-	echo "Run \"/etc/rc.d/init.d/lvcool start\" to start lvcool daemon."
-fi
+%service lvcool restart "lvcool daemon"
 
 %preun
 if [ "$1" = "0" ]; then
-	if [ -f /var/lock/subsys/lvcool ]; then
-		/etc/rc.d/init.d/lvcool stop 1>&2
-	fi
+	%service lvcool stop
 	/sbin/chkconfig --del lvcool
 fi
 
