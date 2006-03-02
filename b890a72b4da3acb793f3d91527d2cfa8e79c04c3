@@ -1,0 +1,2 @@
+- ExclusiveArch: %{ix86},
+- use proper CC.
