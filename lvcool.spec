@@ -1,5 +1,5 @@
 Summary:	Little utility will cool your processor
-Summary(pl):	Ma³e narzêdzie, które bêdzie ch³odzi³o twój procesor
+Summary(pl.UTF-8):   MaÅ‚e narzÄ™dzie, ktÃ³re bÄ™dzie chÅ‚odziÅ‚o twÃ³j procesor
 Name:		lvcool
 Version:	1.7
 Release:	3
@@ -24,10 +24,10 @@ LVCool will cool your Athlon/Duron processor by switching it to a
 low-power mode on Via KT133 or KX133 (VT8363 or VT8371/VT82C686x)
 chipsets during idle.
 
-%description -l pl
-LVCool ch³odzi procesor poprzez prze³±czenie go w tryb o niskim
+%description -l pl.UTF-8
+LVCool chÅ‚odzi procesor poprzez przeÅ‚Ä…czenie go w tryb o niskim
 poborze mocy na chipsetach KT133 lub KX133 (VT8363 lub
-VT8371/VT82C686x) podczas stanu ja³owego.
+VT8371/VT82C686x) podczas stanu jaÅ‚owego.
 
 %prep
 %setup  -q -n LVCool
