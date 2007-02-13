@@ -1,5 +1,5 @@
 Summary:	Little utility will cool your processor
-Summary(pl.UTF-8):   Małe narzędzie, które będzie chłodziło twój procesor
+Summary(pl.UTF-8):	Małe narzędzie, które będzie chłodziło twój procesor
 Name:		lvcool
 Version:	1.7
 Release:	3
